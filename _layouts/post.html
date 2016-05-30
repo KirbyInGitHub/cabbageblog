@@ -36,6 +36,12 @@ layout: default
 	</div>
 	{% endif %}
 
+	{% if site.duoshuo_username %}
+	<div class="comments">
+ 		{% include duoshuo.html %}
+ 	</div>
+ 	{% endif %}
+
 	<div class="post-footer">
 		<div class="column-1">
 			{% if page.previous %}

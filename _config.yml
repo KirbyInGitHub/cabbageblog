@@ -30,6 +30,8 @@ harmony:
   # Google Analytics key, leave blank to ignore
   google_analytics_key: UA-xxxx-x
 
+  duoshuo_username: cabbages
+
   # Profile links, leave blank to ignore
   social: 
     github: 570262616
