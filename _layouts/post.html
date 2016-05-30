@@ -37,10 +37,12 @@ layout: default
 	{% endif %}
 
 	{% if site.duoshuo_username %}
-	<div class="comments">
- 		{% include duoshuo.html %}
- 	</div>
- 	{% endif %}
+	<!-- 多说评论框 start -->
+	<div class="comment">
+	    {% include duoshuo.html %}
+	</div>
+	<!-- 多说评论框 end -->
+	{% endif %}
 
 	<div class="post-footer">
 		<div class="column-1">
