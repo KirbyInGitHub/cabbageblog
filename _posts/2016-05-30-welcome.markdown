@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome!"
 date:   2016-05-30 16:33:25 +0800
-categories: jekyll update
+categories: Home
 ---
 
 Nothing!
