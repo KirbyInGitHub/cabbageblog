@@ -1,42 +1,39 @@
 ---
-layout: post-index
-title: Latest Posts
-description: "Describe this nonsense."
-tags: [Jekyll, theme, themes, responsive, blog, modern]
-comments: false
-image:
-  feature: abstract-1.jpg
-  credit: dargadgetz
-  creditlink: http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/
+layout: default
 ---
+<div id="home" class="page-content wc-container">
+	<div class="posts">
+  		{% for post in site.posts limit:10 %}
+  			<div class="post">
+    			<h3 class="post-title">
+			      <a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">
+			        {{ post.title }}
+			      </a>
+    			</h3>
 
-{% for post in paginator.posts %}
-<article class="hentry">
-  <header>
-    {% if post.image.feature %}
-      <div class="entry-image-index">
-        <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}"><img src="{{ site.url }}/images/{{ post.image.feature }}" alt="{{ post.title }}"></a>
-      </div><!-- /.entry-image -->
-    {% endif %}
-    <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "%B %d, %Y" }}</a></time></span><span class="author vcard"><span class="fn"><a href="{{ site.url }}/about/" title="About {{ site.owner.name }}">{{ site.owner.name }}</a></span></span>
-      {% if site.reading_time %}
-      <span class="entry-reading-time">
-        <i class="fa fa-clock-o"></i>
-        {% include read-time-index.html %}
-      </span><!-- /.entry-reading-time -->
-      {% endif %}
-    </div><!-- /.entry-meta -->
-    {% if post.link %}
-      <h1 class="entry-title"><a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }}</a></h1>
-    {% else %}
-      <h1 class="entry-title"><a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a></h1>
-    {% endif %}
-  </header>
-  <div class="entry-content">
-    {{ post.content }}
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-{% endfor %}
-
-{% include pagination.html %}
+          <p class="post-meta">
+            {% if (post.categories.size > 0 %}
+            <span class="categories">
+            {{ post.categories | array_to_sentence_string }}
+            </span> |
+            {% endif %}
+            <span class="post-date">
+            {{ post.date | date: "%b %-d, %Y" }} 
+            </span>
+          </p>          
+    			    			
+  				<p>
+	  				{{ post.excerpt }}	
+  				</p>
+  				<p>
+  					<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}" title="{{ post.title}}">
+  						Read More
+					</a>
+  				</p>
+  			</div>
+  		{% endfor %}
+	</div>
+	<div class="post-footer">
+		<div class="column-full"><a href="{{ '/blog' | prepend: site.baseurl | prepend: site.url }}">Blog archive</a></div>
+	</div>
+</div>

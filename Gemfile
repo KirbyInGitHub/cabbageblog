@@ -1,8 +1,10 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "json"
-gem "jekyll", "~> 3.0"
-gem "jekyll-sitemap"
-gem "octopress"
-gem "jekyll-paginate"
-gem "jekyll-gist"
+require 'json'
+require 'open-uri'
+versions = JSON.parse(open('https://pages.github.com/versions.json').read)
+
+gem 'github-pages', versions['github-pages']
+gem 'rake'
+
+gem 'pygments.rb'
