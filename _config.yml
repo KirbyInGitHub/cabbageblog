@@ -54,7 +54,8 @@ kramdown:
   #     start_line: 1
 
 # source code highlight
-highlighter: rouge # must be rouge if using Jekyll 3.0+
+# highlighter: rouge # must be rouge if using Jekyll 3.0+
+syntax_highlighter: rouge
 # highlight_theme: <tomorrow-night-bright>
 
 # Permalinks
