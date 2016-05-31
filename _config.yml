@@ -43,6 +43,7 @@ harmono:
 markdown: kramdown
 kramdown:
   input: GFM
+  syntax_highlighter: rouge
   # syntax_highlighter_opts:
   #   # Rouge Options › https://github.com/jneen/rouge#full-options
   #   css_class: 'highlight'
@@ -55,7 +56,6 @@ kramdown:
 
 # source code highlight
 # highlighter: rouge # must be rouge if using Jekyll 3.0+
-syntax_highlighter: rouge
 # highlight_theme: <tomorrow-night-bright>
 
 # Permalinks
@@ -77,3 +77,5 @@ sass:
 
 gems:
   - jekyll-feed
+  - jekyll-paginate
+  - jekyll-gist
