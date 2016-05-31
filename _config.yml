@@ -34,7 +34,7 @@ harmono:
   # Toggle comment system
   comment: false
   # Comment system provider
-  duoshuo: cabbages
+  duoshuo_username: cabbages
 
   disqus:
     short_name: 
