@@ -1,9 +1,5 @@
-<!-- {% if site.harmony.duoshuo_username %}
-多说评论框 start
-
-<!-- 多说公共JS代码 end -->
-<!-- {% endif %} --> -->
-
+{% if site.harmony.duoshuo_username %}
+<!-- 多说评论框 start -->
 <div class="ds-thread"
  		data-thread-key="{{page.id}}"
         data-title="{{page.title}}"
@@ -22,3 +18,6 @@
 		 || document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
 </script>
+<!-- 多说公共JS代码 end -->
+{% endif %}
+
