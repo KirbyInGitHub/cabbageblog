@@ -1,55 +1,65 @@
-# Harmony Jekyll theme general configurations 
+# Harmono Jekyll theme general configurations
 
-# Base URL
+# Site URL
+# url: https://kuoe0.github.io
+url: "https://www.cabbage.space"
+# Base URL (https://kuoe0.github.io{/baseurl})
 baseurl: ""
 
-# Site live URL
-url: http://www.cabbage.space
-
-# Localhost 
-# url: http://127.0.0.1:4000  
-
-# Harmony theme configuration. Please change accordingly.
-harmony:
+# Harmono theme configuration. Please change accordingly.
+harmono:
   name: I'm cabbage
   # Little description about your site
   description: I am an iOS developer, working in ezbuy company.
-  # 'meta_description:' Write an awesome description for your new site here.
-  # It will appear in your document head meta (for Google search results) and 
-  # in your feed.xml site description.
-  meta_description: > # 
-    
-  basetheme: theme-base-04 # pre defined thmes are darken, blue-water, redish.
-  author: # Author details
-    name: Cabbage
-    email: zhangpeng@ezbuy.com
-    url: http://www.cabbage.space
-
+  basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
   # Google Analytics key, leave blank to ignore
-  google_analytics_key:
-
-  duoshuo_username: cabbages
-
+  google_analytics_key: 
   # Profile links, leave blank to ignore
-  social: 
-    github: 570262616
-    twitter: 大白菜cabbage
+  social:
+    email:    zhangpeng@ezbuy.com
+    # linkedin: linkedin_name
+    github:   570262616
+    twitter:  大白菜cabbage
     facebook: 大白菜cabbage
-    # gplus: +GayanVirajith
-    # dribble: gayan
-    pinterest: 
+    # gplus:    gplus_name
+
+  page_list:
+    - About
+    - Archive
+    - FAQ
+
   # Toggle disclaimer in footer
   show_disclaimer: false
 
-# Conversion / Build settings 
-markdown:    kramdown
-# This is how you put pygments config in jekyll 2.0 instead of pygments: true
-highlighter: pygments 
+  # Toggle comment system
+  comment: true
+  # Comment system provider
+  duoshuo: cabbages
+
+  disqus:
+    short_name: 
+
+# Conversion / Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    # Rouge Options › https://github.com/jneen/rouge#full-options
+    css_class: 'highlight'
+    #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+# source code highlight
+highlighter: rouge # must be rouge if using Jekyll 3.0+
 
 # Permalinks
-permalink:        pretty
+permalink: "/posts/:year/:month/:day/:title/"
 
-exclude: 
+exclude:
   - CNAME
   - Gemfile
   - Rakefile
@@ -60,5 +70,8 @@ exclude:
 
 # Sass conversion configs
 sass:
-    sass_dir: assets/css/_sass
-    style: :compressed
+  sass_dir: assets/css/_sass
+  style: :compressed
+
+gems:
+  - jekyll-feed

@@ -1,7 +1,7 @@
 ---
 ---
 
-// Import reset 
+// Import reset
 @import "partials/reset";
 
 // Import colors, fonts etc...
@@ -13,11 +13,10 @@
 // Import layout mixin
 @import "partials/layout";
 
-// Import syntax 
-@import "partials/syntax";
+// Import syntax
+@import "{% if site.highlight_theme %}{{ site.highlight_theme | prepend: 'syntax-theme/' | append: '.css' }}{% else %}{{ 'syntax-theme/default.css' }}{% endif %}";
 
-
-/* -------------------------------- 
+/* --------------------------------
 
  Primary style
 
@@ -40,24 +39,21 @@ body {
 }
 
 .wc-container {
-    width: 90%;
-    max-width: $M; // see breakpoints in _sass/partials/_layout.scss
-    margin: 0 auto;
+  width: 90%;
+  max-width: $M; // see breakpoints in _sass/partials/_layout.scss
+  margin: 0 auto;
 
-    &::after { /* Clearfix */
-        content: '';
-        display: table;
-        clear: both;
-    }
+  &::after { /* Clearfix */
+      content: '';
+      display: table;
+      clear: both;
+  }
 }
 
 .wc-img-replace { /* replace text with a background-image */
   display: inline-block;
   overflow: hidden;
-  text-indent: 100%;
   white-space: nowrap;
-  background-repeat: no-repeat;
-  background-position: center center;
 }
 
 /* --------------------------------
@@ -66,7 +62,7 @@ body {
 
 --------------------------------- */
 
-h1, h2, h3, h4, h5, h6 { 
+h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
@@ -137,7 +133,6 @@ img {
   height: auto;
 }
 
-
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -157,10 +152,10 @@ em, i { font-style: italic; }
 
 --------------------------------- */
 
-// default 
+// default
 
 a.default-anchor {
-  
+
   text-decoration: none;
   border-bottom: 1px solid transparent;
   color: $base-08;
@@ -187,18 +182,22 @@ header.main-header, footer.main-footer {
   p,address {
     @include font-size(12px);
     @include MQ(M) {
-      @include font-size(14px);        
+      @include font-size(14px);
     }
   }
 }
 
 header.main-header {
-  color: $base-00;
-  border-top: 5px $base-00 solid;
+  color: white;
 
-  h1, h2 { text-align: center; color: inherit;}
-  a { 
+  h1, h2 {
+    text-align: center;
     color: inherit;
+    a {
+      color: white;
+    }
+  }
+  a {
     &:hover, &:active, &:focus {
       border-bottom-color: transparent;
     }
@@ -209,7 +208,7 @@ header.main-header {
     text-align: center;
     padding: 15px;
   }
-  ul li {       
+  ul li {
     display: inline-block;
     position:relative;
     color: $base-08;
@@ -221,7 +220,7 @@ header.main-header {
     width: 15px;
   }
 
-  ul li a { 
+  ul li a {
     display:inline-block;
     color: inherit;
     border-bottom: 2px transparent solid;
@@ -239,6 +238,10 @@ header.main-header {
 footer.main-footer {
   background-color: $base-00;
   color: $base-07;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+
   .column {
     float:left;
     @include column(1);
@@ -256,6 +259,7 @@ footer.main-footer {
       padding: 10px 0;
       text-transform: uppercase;
   }
+
   h6::before {
       content: '';
       position: absolute;
@@ -264,7 +268,7 @@ footer.main-footer {
       height: 2px;
       background: $base-07;
       overflow: hidden;
-  } 
+  }
 
   ul.menu {
     padding: 0 0 1em 0;
@@ -272,9 +276,9 @@ footer.main-footer {
       @include font-size(12px);
       line-height: 1.6;
       display: inline;
-      padding-right: 10px;        
+      padding-right: 10px;
       @include MQ(M) {
-        @include font-size(16px);          
+        @include font-size(16px);
       }
     }
   }
@@ -283,69 +287,51 @@ footer.main-footer {
     text-align: center;
   }
 
- ul.social-media {
-  text-align:left;
-  padding: 0 0 10px 0;
-  li { 
-    display:inline-block;
-  }
-  li > a {
-    width: 32px;
-    height: 32px;
-    background: $base-07;
-    background-image: url("./images/socials-icons.svg");
-    background-size: 224px 64px;
-    border-radius: 0.25em;
-    @include transition(background-color 0.2s);
-    border-bottom-color: transparent;
+  ul.social-media {
+    text-align:left;
+    padding: 0 0 10px 0;
 
-    &:hover {
-      background-color: $base-08;
+    li {
+      display:inline-block;
     }
-  }
-    
-  li a.twitter {
-    background-position: 0 0;
-      &:hover {
-        background-position: 0 -32px;
-    } 
-  }
 
-  li a.github {
-    background-position: -32px 0;
-    &:hover {
-      background-position: -32px -32px;
+    li > a {
+      background: $base-07;
+      border-radius: 0.25em;
+      border: none;
+      padding: 5px 3px 5px 3px;
+      color: black;
     }
-  }
 
-  li a.facebook {
-    background-position: -64px 0;
-    &:hover {
-      background-position: -64px -32px;
+    li a.github {
+      background-image: url(./images/github.svg);
     }
-  }
 
-  li a.dribble {
-    background-position: -96px 0;
-    &:hover {
-      background-position: -96px -32px;
+    li a.twitter {
+      background-image: url(./images/twitter.svg);
+    }
+
+    li a.linkedin {
+      background-image: url(./images/linkedin.svg);
+    }
+
+    li a.email {
+      background-image: url(./images/mail.svg);
+    }
+
+    li a.facebook {
+      background-image: url(./images/facebook.svg);
+    }
+
+    li a.google {
+      background-image: url(./images/googleplus.svg);
+    }
+
+    li a.rss {
+      background-image: url(./images/rss-feed.svg);
     }
   }
 
-  li a.google {
-    background-position: -128px 0;
-    &:hover {
-      background-position: -128px -32px;
-    }
-  }
-
-  li a.pinterest {
-      background-position: -196px 0;
-      &:hover {
-        background-position: -196px -32px;
-      }
-    }
-  }
 }
 
 .no-svg footer.main-footer ul.social-media li a {
@@ -370,14 +356,14 @@ div.page-content {
   @include MQ(M) {
     min-height: 400px;
   }
-}    
+}
 
 div.page-content {
-  ul {       
+  ul {
     padding: 0 0 1em 0;
     li {
       @include font-size(14px);
-      color: $color-2; 
+      color: $color-2;
       line-height: 1.6;
       background: url(./images/bullet.svg);
       background-repeat: no-repeat;
@@ -385,22 +371,22 @@ div.page-content {
       padding: 0 0 5px 15px;
       margin-left: 0;
     }
-    @include MQ(M){        
-      li {         
-        @include font-size(16px);  
+    @include MQ(M){
+      li {
+        @include font-size(16px);
         line-height: 1.5;
-        background-position: 0 7px; 
+        background-position: 0 7px;
       }
     }
   }
-  ol { 
+  ol {
     @include font-size(12px);
     // padding-top: 1em;
     padding-bottom: 1em;
     list-style: decimal;
     margin-left: 0;
     li {
-      color: $color-2; 
+      color: $color-2;
       line-height: 1.6;
       padding: 0 0 5px 0px;
       margin-left: 2em;
@@ -408,9 +394,9 @@ div.page-content {
     }
     @include MQ(M){
       @include font-size(16px);
-      li { 
+      li {
         line-height: 1.5;
-        background-position: 0 7px; 
+        background-position: 0 7px;
       }
     }
   }
@@ -418,10 +404,10 @@ div.page-content {
   dl {
     padding-bottom: 1em;
     dt, dd {
-      @include font-size(12px);  
-      line-height: 1.5;        
+      @include font-size(12px);
+      line-height: 1.5;
     }
-    
+
     dt {
       font-weight: bold;
       padding-bottom: 5px;
@@ -436,23 +422,23 @@ div.page-content {
       padding-left: 10px;
     }
 
-    @include MQ(M) {        
+    @include MQ(M) {
       dt, dd {
         @include font-size(16px);
-        line-height: 1.6;        
+        line-height: 1.6;
       }
     }
   }
-  
-  img { 
+
+  img {
     padding: 1em 0;
   }
 
   p {
-    margin-bottom: 1em;      
+    margin-bottom: 1em;
   }
 
-  h1, h2, h3, h4, h5, h6 { 
+  h1, h2, h3, h4, h5, h6 {
     padding-bottom: 5px;
   }
 }
@@ -460,19 +446,19 @@ div.page-content {
 .no-svg div.page-content ul li {
   background: url(./images/bullet.png);
   @include font-size(13px);
-  color: $color-2; 
+  color: $color-2;
   line-height: 1.6;
   background-repeat: no-repeat;
   background-position: 0 6px;
   padding: 0 0 5px 15px;
   margin-left: 0;
-} 
+}
 
 // Theme base 01
 body.theme-base-01 {
-  
+
   a {
-    @extend .default-anchor;   
+    @extend .default-anchor;
   }
 
   footer.main-footer {
@@ -480,17 +466,9 @@ body.theme-base-01 {
     color: $base-07;
   }
 
-  header.main-header {
-    color: $base-01;
-    ul li { 
-      color: $base-08;
-    }
-  }
-
   div.page-content {
     h1, h2, h3, h4, h5, h6 { color: $base-01; }
   }
-
 
 }
 
@@ -500,8 +478,13 @@ body.theme-base-01 {
 
 --------------------------------- */
 
-header.main-header { 
+header.main-header {
   padding: 1em 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #272935;
   @include MQ(M) { padding: 2em 0; }
 }
 footer.main-footer {
@@ -509,10 +492,31 @@ footer.main-footer {
   @include MQ(M) { padding: 2em 0; }
 }
 .page-content {
+  background-color: white;
   padding: 1em 0;
   @include MQ(M) { padding: 2em 0; }
 }
-
+#page-wrapper {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.feature-photo-credit {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+#title {
+  border-top:    solid 2px white;
+  border-bottom: solid 2px white;
+}
+.header-seperator {
+  color: #da4939;
+}
 
 /* ---------------------------------
 
@@ -543,25 +547,28 @@ Code snippets
 code, pre {
   font-family: Menlo, Monaco, "Courier New", monospace;
 }
-code {  
+code {
   padding: .25em .5em;
   font-size: 85%;
   color: $base-08;
   background-color: rgba($base-08, .1);
 }
+
 pre {
   display: block;
   margin-top: 0;
   margin-bottom: 1em;
   padding: 1em;
   @include font-size(12px);
-  line-height: 1.4;
+  line-height: 28px;
   white-space: pre;
-  white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;
   background-color: $color-white;
-  border: 1px solid $base-05;
+  border: none;
+  overflow-x: auto;
+
+  font-family: "Inconsolata", "Consolas", "Courier New", monospace;
   code {
     padding: 0;
     font-size: 100%;
@@ -571,14 +578,6 @@ pre {
 
   @include MQ(M) {
     @include font-size(14px);
-  }
-}
-
-.highlight {
-  margin-bottom: 1em;
-  margin-top: 1em;
-  pre {
-    margin-bottom: 0;
   }
 }
 
@@ -615,34 +614,107 @@ Post styles
 --------------------------------- */
 
 div.posts {
-
-  .div.post {
-    
+  div.post {
+    padding-top: .5em;
+    padding-bottom: 1em;
+    border-bottom: 1px $base-05 solid;
+    @include MQ(M) {
+      padding-bottom: 2em;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
-div.post {
-  padding-top: .5em;
-  padding-bottom: 1em;
-  border-bottom: 1px $base-05 solid;
-  @include MQ(M) {
 
-    padding-bottom: 2em;  
-  }
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-p.post-meta {
+.post-date {
   line-height: 1.6;
   letter-spacing: 2px;
   @include font-size(12px);
   overflow: hidden;
-  display: block;
-  padding: 1em 0;
+  margin-bottom: 1em;
+  padding: 0;
   color: #7A7A7A;
   @include MQ(M) {
     @include font-size(16px);
+  }
+}
+
+.post-tags {
+  border-top: 1px solid $base-05;
+  margin: 0;
+  padding: 5px 0;
+
+  line-height: 1.6;
+  letter-spacing: 2px;
+  @include font-size(12px);
+  overflow: hidden;
+  color: #7A7A7A;
+  @include MQ(M) {
+    @include font-size(16px);
+  }
+
+  ul.tags-list {
+    margin: 0;
+    padding: 0;
+
+    li.tag {
+      background: rgba(#7A7A7A, .1);
+      display: inline-block;
+      margin-left: 0;
+      float: left;
+      margin-right: 5px;
+      padding: 0 5px;
+    }
+  }
+}
+
+.page-content p.post-meta {
+  margin: 0;
+}
+
+div.post-content img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-preview {
+  @include MQ(M) {
+    display: flex;
+    flex-direction: row;
+    max-height: 200px;
+  }
+}
+
+.thumb-photo-block {
+  @include MQ(M) {
+    margin: 0;
+    margin-right: 1em;
+  }
+
+  img.thumb-photo {
+    width: 100%;
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+
+    @include MQ(M) {
+      width: 200px;
+      height: 200px;
+      min-width: 200px;
+      min-height: 200px;
+      max-width: 200px;
+      max-height: 200px;
+    }
+  }
+}
+
+.post-excerpt {
+  max-height: 8em;
+  overflow: hidden;
+  margin-top: 5px;
+  @include MQ(M) {
+    margin-top: 0;
   }
 }
 
@@ -686,7 +758,7 @@ p.post-meta {
 
 --------------------------------- */
 .post-footer {
-  
+
   border-top: 1px solid $base-05;
   border-bottom: 1px solid $base-05;
   height: 40px;
@@ -694,11 +766,11 @@ p.post-meta {
   width: 100%;
   position: relative;
 
-  @include MQ(M) {    
+  @include MQ(M) {
     height: 80px;
   }
 
-  .column-1, .column-2, .column-3, .column-full {    
+  .column-1, .column-2, .column-3, .column-full {
     padding-top: 10px;
     @include MQ(M) {
       padding-top: 30px;
@@ -707,7 +779,7 @@ p.post-meta {
     a,span {
       @include font-size(12px);
       @include MQ(M) {
-        @include font-size(16px);        
+        @include font-size(16px);
       }
     }
   }
@@ -749,4 +821,137 @@ th {
 tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
   background-color: $base-05;
+}
+
+/* --------------------------------
+
+  Navigation bar
+
+--------------------------------- */
+nav {
+  position: fixed;
+  top: 0;
+  line-height: 1.5em;
+  width: 100%;
+  z-index: 99;
+  &.dark {
+    transition: background-color 0.5s ease-out;
+    background-color: #272935;
+  }
+
+  ul.nav-link {
+    list-style: none;
+    padding: 0;
+    overflow: auto;
+    li {
+      float: right;
+      a {
+        padding: 5px 10px;
+        display: block;
+        font-size: 1.5em;
+        color: white;
+      }
+      &#nav-home {
+        float: left;
+      }
+      &#nav-menu:hover a {
+        border-bottom: none;
+      }
+    }
+    &.banner {
+      display: none;
+    }
+    &.dropdown {
+      display: none;
+      box-shadow: 0px 2px 2px #da4939;
+      li {
+        float: none;
+      }
+    }
+
+    @include MQ(M) {
+      background-color: transparent;
+      display: inline;
+
+      li {
+        float: right;
+        &#nav-menu {
+          display: none;
+        }
+        &:hover, &:focus {
+          transition: background-color 0.3s ease-out;
+          background-color: #da4939;
+        }
+      }
+      &.banner {
+        display: inline;
+      }
+      &.dropdown {
+        display: none;
+      }
+    }
+  }
+
+}
+
+/* --------------------------------
+
+  Syntax Highlight Block
+
+--------------------------------- */
+// Reference:
+// https://github.com/ensemblejs/website/blob/cabb4ec475cafc225bf287eaec0671405a94120b/source/assets/stylesheets/_github.css.scss
+
+.highlight {
+  margin-bottom: 25px;
+
+  pre {
+    margin: 0;
+  }
+
+  pre.lineno {
+    padding: 12px;
+    background-color: transparent;
+  }
+
+  .code {
+    width: calc(100% - 50px);
+    overflow-y: scroll;
+
+    pre {
+      padding: 12px;
+    }
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  td {
+    padding: 0;
+    border: solid 1px #ddd;
+  }
+
+  .gutter {
+    width: 50px;
+    text-align: right;
+  }
+}
+
+/* --------------------------------
+
+  Disqus
+
+--------------------------------- */
+
+#disqus_thread {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top: 1px solid $base-05;
+
+  @include MQ(M) {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
 }
