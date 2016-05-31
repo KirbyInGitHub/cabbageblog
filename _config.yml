@@ -2,7 +2,7 @@
 
 # Site URL
 # url: https://kuoe0.github.io
-url: "https://www.cabbage.space"
+url: "http://www.cabbage.space"
 # Base URL (https://kuoe0.github.io{/baseurl})
 baseurl: ""
 
@@ -32,7 +32,7 @@ harmono:
   show_disclaimer: false
 
   # Toggle comment system
-  comment: true
+  comment: false
   # Comment system provider
   duoshuo: cabbages
 
