@@ -13,22 +13,20 @@ url: http://www.cabbage.space
 harmony:
   name: I'm cabbage
   # Little description about your site
-  description: I am an iOS developer, has worked in ezbuy company.
+  description: I am an iOS developer, working in ezbuy company.
   # 'meta_description:' Write an awesome description for your new site here.
   # It will appear in your document head meta (for Google search results) and 
   # in your feed.xml site description.
   meta_description: > # 
-   Harmony is a free responsive jekyll theme by Gayan Virajith
-   and Maheshika Lakmali. Sourced on Github - 
-   https://github.com/gayanvirajith/harmony
-  basetheme: theme-base-01 # pre defined thmes are darken, blue-water, redish.
+    
+  basetheme: theme-base-02 # pre defined thmes are darken, blue-water, redish.
   author: # Author details
     name: Cabbage
     email: zhangpeng@ezbuy.com
     url: http://www.cabbage.space
 
   # Google Analytics key, leave blank to ignore
-  google_analytics_key: UA-xxxx-x
+  google_analytics_key:
 
   duoshuo_username: cabbages
 
@@ -41,7 +39,7 @@ harmony:
     # dribble: gayan
     pinterest: 
   # Toggle disclaimer in footer
-  show_disclaimer: true
+  show_disclaimer: false
 
 # Conversion / Build settings 
 markdown:    kramdown
