@@ -57,7 +57,7 @@ kramdown:
 highlighter: rouge # must be rouge if using Jekyll 3.0+
 
 # Permalinks
-# permalink:
+permalink:        pretty
 
 exclude:
   - CNAME
