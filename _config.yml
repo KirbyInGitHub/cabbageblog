@@ -19,7 +19,7 @@ harmony:
   # in your feed.xml site description.
   meta_description: > # 
     
-  basetheme: theme-base-02 # pre defined thmes are darken, blue-water, redish.
+  basetheme: theme-base-04 # pre defined thmes are darken, blue-water, redish.
   author: # Author details
     name: Cabbage
     email: zhangpeng@ezbuy.com
