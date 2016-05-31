@@ -5,7 +5,6 @@ date:   2016-05-30 16:33:25 +0800
 description: Just Test Page
 categories: 
 - Home
-permalink: sample-post
 ---
 
 Just test!
