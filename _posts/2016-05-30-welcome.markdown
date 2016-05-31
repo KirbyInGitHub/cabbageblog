@@ -15,7 +15,7 @@ Nothing!
 
 ### Swift Example
 
-```Swift
+```swift
 import Foundation
 
 public protocol SelectionSource: class {
