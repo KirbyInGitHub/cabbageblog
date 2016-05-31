@@ -55,6 +55,7 @@ kramdown:
 
 # source code highlight
 highlighter: rouge # must be rouge if using Jekyll 3.0+
+highlight_theme: <tomorrow-night-bright>
 
 # Permalinks
 permalink:        pretty
