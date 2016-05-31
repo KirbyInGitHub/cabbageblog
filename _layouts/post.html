@@ -44,11 +44,11 @@ layout: default
     {% if site.harmono.comment %}
       {% include disqus.html %}
     {% endif %}
-      {% include duoshuo.html %}
+
+      
     {% if site.harmono.duoshuo_username %}
-    <!-- 多说评论框 start -->
-    
-{% endif %}
+      {% include duoshuo.html %}
+    {% endif %}
 
     <div class="post-footer">
       <div class="column-1">
