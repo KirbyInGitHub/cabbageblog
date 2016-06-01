@@ -43,7 +43,7 @@ harmono:
 markdown: kramdown
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  # syntax_highlighter: rouge
   syntax_highlighter_opts:
     # Rouge Options › https://github.com/jneen/rouge#full-options
     default_lang: swift
