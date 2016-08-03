@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "PDT下载"
+date:   2016-08-03 17:23:23 +0800
+description: ezbuy内部物流派送软件OTA安装
+categories: Home
+---
+
+ezbuy内部物流派送软件OTA安装
+
+---
+
+[PDT-Download](itms-services://?action=download-manifest&url=https://app.65dg.me/IDCM_UAT_Enterprise.plist)
+
+
