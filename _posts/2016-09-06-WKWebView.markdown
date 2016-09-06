@@ -10,13 +10,12 @@ ezbuy内部iOS小组分享
 
 ---
 
-#WKWebView实践分享
+###WKWebView实践分享
 
 自从公司的`ezbuy` App最低支持版本提升到`iOS8`以后, 使用更多的`iOS8`以后才特有的新特性就被提上了议程, 比如`WebKit`.
 	作为公司最没有节操, 最没有底线的程序员之一, 这项任务不可避免的就落到了我的身上.
 
-既然要使用`Webkit`, 那么首先我们就得明白为什么要使用它, 它相对于`UIWebView`来说, 有什么优势, 同时, 还得知道它的缺陷,
-	以及这些缺陷是否会对公司现有业务造成影响.
+既然要使用`Webkit`, 那么首先我们就得明白为什么要使用它, 它相对于`UIWebView`来说, 有什么优势, 同时, 还得知道它的劣势,以及这些劣势是否会对公司现有业务造成影响.
 
 首先我们来说说它的优势:
 
@@ -31,4 +30,28 @@ ezbuy内部iOS小组分享
 
 * 不支持缓存
 * 不能拦截修改Request
+
+说完了优势劣势, 那下面就来说说它的基本用法.
+
+###一、加载网页
+加载网页的方法和`UIWebView`相同, 代码如下:
+
+```swift
+ WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
+[self.view addSubview:webView];
+```
+###二、加载状态的回调 `WKNavigationDelegate`
+用来追踪加载过程（页面开始加载、加载完成、加载失败）的方法：
+
+```swift
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation;
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation;
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation;
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation;
+```
 
