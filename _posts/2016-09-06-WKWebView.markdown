@@ -33,7 +33,7 @@ ezbuy内部iOS小组分享
 
 说完了优势劣势, 那下面就来说说它的基本用法.
 
-## 一、加载网页
+### 一、加载网页
 
 加载网页的方法和`UIWebView`相同, 代码如下:
 
@@ -42,7 +42,8 @@ ezbuy内部iOS小组分享
 [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
 [self.view addSubview:webView];
 ```
-## 二、加载状态的回调 `WKNavigationDelegate`
+
+### 二、加载状态的回调 `WKNavigationDelegate`
 
 用来追踪加载过程（页面开始加载、加载完成、加载失败）的方法：
 
