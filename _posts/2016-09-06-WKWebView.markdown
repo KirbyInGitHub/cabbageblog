@@ -52,10 +52,13 @@ view.addSubview(webView)
 ```swift
 // 页面开始加载时调用
 func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
+
 // 当内容开始返回时调用
 func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!)
+
 // 页面加载完成之后调用
 func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
+
 // 页面加载失败时调用
 func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
 ```
@@ -65,8 +68,10 @@ func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNa
 ```swift
 // 接收到服务器跳转请求之后调用
 func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!)
+
 // 在收到响应后，决定是否跳转
 func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
+
 // 在发送请求之前，决定是否跳转
 func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
 ```
@@ -76,12 +81,16 @@ func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigatio
 ```swift
 // 创建一个新的webView
 func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
+
 // webView中的确认弹窗
 func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void)
+
 // webView中的输入框
 func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void)
+
 // webView中的警告弹窗
 func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void)
+
 //TODO: iOS10中新添加的几个代理方法待补充
 ```
 
@@ -92,6 +101,8 @@ func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: S
 ```swift
 func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage)
 ```
+
+这部分其实除了iOS10新加的几个代理方法, 其他的并没有什么特别的. 只不过把原本`UIWebView`里面相应的代理方法挪过来而已.
 
 ##### 三、WKWebView的Cookie
 
@@ -215,4 +226,6 @@ func userContentController(_ userContentController: WKUserContentController, did
 
 解决了上面的问题, 咱们产品经理又提出了国际化的需求, 因为我们的APP同时为至少5个国家的客户提供, `国际化的方案也是我做的, APP内部可以热切换语言, 也许在下一篇博文中会介绍我们项目中的国际化方案.` 那么请求H5页面的时候, 理所应当的就应该带上语言信息了. 
 
-这部分的内容, 请听下回分解...
+这部分的内容, 因为双十一临近, 目前还没有具体实施. 等功能上线以后, 再来补充.
+
+其实我挺佩服我自己的, 9月6号开始写这个, 一直到11月5号才写的差不多能看...
