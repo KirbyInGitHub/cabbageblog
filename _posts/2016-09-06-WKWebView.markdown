@@ -45,7 +45,7 @@ view.addSubview(webView)
 
 ##### 二、WKWebView的代理方法
 
-*WKNavigationDelegate*
+`WKNavigationDelegate`
 
 用来追踪加载过程（页面开始加载、加载完成、加载失败）的方法：
 
@@ -71,7 +71,7 @@ func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigat
 func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
 ```
 
-*WKUIDelegate*
+`WKUIDelegate`
 
 ```swift
 // 创建一个新的webView
@@ -85,7 +85,7 @@ func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: S
 //TODO: iOS10中新添加的几个代理方法待补充
 ```
 
-*WKScriptMessageHandler*
+`WKScriptMessageHandler`
 
 这个协议包含一个必须实现的方法, 它可以直接将接收到的JS脚本转为Swift或者OC对象.
 
