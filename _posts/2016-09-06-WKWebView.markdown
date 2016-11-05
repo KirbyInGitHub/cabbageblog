@@ -95,3 +95,97 @@ func userContentController(_ userContentController: WKUserContentController, did
 
 ##### 三、WKWebView的Cookie
 
+由于我们的APP内使用了大量的商品列表/活动等H5页面, H5需要知道是哪一个用户在访问这个页面, 那么用`Cookie`是最好也是最合适的解决方案了, 在UIWebView的时候, 我们并没有使用`Cookie`的困扰, 我们只需要写一个方法, 往`HTTPCookieStorage`里面注入一个我们用户的`HTTPCookie`就可以了.同一个应用，不同`UIWebView`之间的`Cookie`是自动同步的。并且可以被其他网络类访问比如`NSURLConnection`,`AFNetworking`。
+
+它们都是保存在`HTTPCookieStorage`容器中。 当`UIWebView`加载一个URL的时候，在加载完成时候，Http Response，对`Cookie`进行写入,更新或者删除，结果更新`Cookie`到`HTTPCookieStorage`存储容器中。
+代码类似于:
+
+```swift
+    public class func updateCurrentCookieIfNeeded() {
+        
+        let cookieForWeb: HTTPCookie?
+        
+        if let customer = CustomerUser.current {
+        
+            var cookie1Props: [HTTPCookiePropertyKey: Any] = [:]
+        
+            cookie1Props[HTTPCookiePropertyKey.domain] = customer.area?.webURLSource.webCookieHost
+            cookie1Props[HTTPCookiePropertyKey.path] = "/"
+            cookie1Props[HTTPCookiePropertyKey.name] = CustomerUser.CookieName
+            cookie1Props[HTTPCookiePropertyKey.value] = customer.cookie
+            
+            cookieForWeb = HTTPCookie(properties: cookie1Props)
+        } else {
+            cookieForWeb = nil
+        }
+        
+        let storage = HTTPCookieStorage.shared
+        
+        if let cookie = cookieForWeb, let cookie65 = cookieFor65daigou(customer: CustomerUser.current) {
+            storage.setCookie(cookie)
+            storage.setCookie(cookie65)
+        } else {
+            guard let cookies = storage.cookies else { return }
+            
+            let needDeleteCookies = cookies.filter { $0.name == CustomerUser.CookieName }
+            needDeleteCookies.forEach({ (cookie) in
+                storage.deleteCookie(cookie)
+            })
+        }
+    }
+```
+
+但是在我迁移到`WKWebView`的时候, 我发现这一招不管用了, `WKWebView`实例不会把`Cookie`存入到App标准的的`Cookie`容器(`HTTPCookieStorage`)中, `WKWebView`拥有自己的私有存储. 
+
+因为 `NSURLSession`/`NSURLConnection`等网络请求使用`HTTPCookieStorage`进行访问`Cookie`,所以不能访问`WKWebView`的`Cookie`,现象就是`WKWebView`存了`Cookie`,其他的网络类如`NSURLSession`/`NSURLConnection`却看不到. 同时`WKWebView`也不会读取存储在`HTTPCookieStorage`中的`Cookie`.
+
+为了解决这一问题, 我查了大量的资料, 最后发现通过JS的方式注入`Cookie`是对于我们目前的代码来说是最合适也是最方便的. 因为我们已经有了注入到`HTTPCookieStorage`的代码, 那么只需要把这些`Cookie`转化成JS并且注入到`WKWebView`里面就可以了.
+
+```swift
+    fileprivate class func getJSCookiesString(_ cookies: [HTTPCookie]) -> String {
+        var result = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
+        
+        for cookie in cookies {
+            result += "document.cookie='\(cookie.name)=\(cookie.value); domain=\(cookie.domain); path=\(cookie.path); "
+            if let date = cookie.expiresDate {
+                result += "expires=\(dateFormatter.string(from: date)); "
+            }
+            if (cookie.isSecure) {
+                result += "secure; "
+            }
+            result += "'; "
+        }
+        return result
+    }
+```
+
+注入的方法就是在每次init`WkWebView`的时候, 使用下面的`config`就可以了:
+
+```swift
+    public class func wkWebViewConfig() -> WKWebViewConfiguration {
+        
+        updateCurrentCookieIfNeeded()
+        
+        let userContentController = WKUserContentController()
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            let script = getJSCookiesString(cookies)
+            let cookieScript = WKUserScript(source: script, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
+            userContentController.addUserScript(cookieScript)
+        }
+        let webViewConfig = WKWebViewConfiguration()
+        webViewConfig.userContentController = userContentController
+        
+        return webViewConfig
+    }
+    
+    public class func getJSCookiesString() -> String? {
+        
+        guard let cookies = HTTPCookieStorage.shared.cookies else {
+            return nil
+        }
+        return getJSCookiesString(cookies)
+    }
+```
