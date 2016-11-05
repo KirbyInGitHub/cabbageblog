@@ -40,25 +40,28 @@ harmono:
     short_name: 
 
 # Conversion / Build settings
-markdown: kramdown
-kramdown:
-  input: GFM
-  # syntax_highlighter: rouge
-  # syntax_highlighter_opts:
-  #   # Rouge Options › https://github.com/jneen/rouge#full-options
-  #   default_lang: swift
-  #   css_class: 'highlight'
-  #   #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
-  #   span:
-  #     line_numbers: false
-  #   block:
-  #     line_numbers: true
-  #     start_line: 1
-  #   wrap: true
+# markdown: kramdown
+# kramdown:
+#   input: GFM
+#   # syntax_highlighter: rouge
+#   # syntax_highlighter_opts:
+#   #   # Rouge Options › https://github.com/jneen/rouge#full-options
+#   #   default_lang: swift
+#   #   css_class: 'highlight'
+#   #   #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
+#   #   span:
+#   #     line_numbers: false
+#   #   block:
+#   #     line_numbers: true
+#   #     start_line: 1
+#   #   wrap: true
 
-# source code highlight
-highlighter: rouge # must be rouge if using Jekyll 3.0+
-highlight_theme: swift
+# # source code highlight
+# highlighter: rouge # must be rouge if using Jekyll 3.0+
+# highlight_theme: swift
+
+markdown: kramdown
+highlighter: rouge
 
 # Permalinks
 permalink:        pretty
