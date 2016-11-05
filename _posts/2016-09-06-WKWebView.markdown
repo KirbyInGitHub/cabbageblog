@@ -205,7 +205,7 @@ func userContentController(_ userContentController: WKUserContentController, did
 
 上面`Cookie`的问题解决了, 咱们的前端又提出了新的问题, 他们需要知道用户访问了网页是使用了客户端(iOS/Android)来的.
 
-这个就好解决了, 其实和WKWebVIew的关系不大. 最合适添加的地方就是在`user-Agent`里面, 用下面的代码全局添加就可以.
+这个就好解决了, 其实和WKWebVIew的关系不大. 最合适添加的地方就是在`user-Agent`里面, 不过并没有使用WKWebView自己的User-Agent去定义, 因为这个字段只支持`iOS9`以上, 所有用下面的代码全局添加就可以.
 
 ```swift
     fileprivate func setUserAgent(_ webView: WKWebView) {
