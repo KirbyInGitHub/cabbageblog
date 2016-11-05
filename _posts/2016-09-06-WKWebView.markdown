@@ -189,3 +189,30 @@ func userContentController(_ userContentController: WKUserContentController, did
         return getJSCookiesString(cookies)
     }
 ```
+
+##### 四、关于User-Agent
+
+上面`Cookie`的问题解决了, 咱们的前端又提出了新的问题, 他们需要知道用户访问了网页是使用了客户端(iOS/Android)来的.
+
+这个就好解决了, 其实和WKWebVIew的关系不大. 最合适添加的地方就是在`user-Agent`里面, 用下面的代码全局添加就可以.
+
+```swift
+    fileprivate func setUserAgent(_ webView: WKWebView) {
+        
+        let userAgentHasPrefix = "xxxxxx "
+        
+        webView.evaluateJavaScript("navigator.userAgent", completionHandler: { (result, error) in
+
+            guard let agent = result as? String , agent.hasPrefix(userAgentHasPrefix) == false else { return }
+            
+            let newAgent = userAgentHasPrefix + agent
+            UserDefaults.standard.register(defaults: ["UserAgent":newAgent])
+        })
+    }
+```
+
+##### 五、关于国际化
+
+解决了上面的问题, 咱们产品经理又提出了国际化的需求, 因为我们的APP同时为至少5个国家的客户提供, `国际化的方案也是我做的, APP内部可以热切换语言, 也许在下一篇博文中会介绍我们项目中的国际化方案.` 那么请求H5页面的时候, 理所应当的就应该带上语言信息了. 
+
+这部分的内容, 请听下回分解...
