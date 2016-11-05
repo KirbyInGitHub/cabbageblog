@@ -33,28 +33,65 @@ ezbuy内部iOS小组分享
 
 说完了优势劣势, 那下面就来说说它的基本用法.
 
-### 一、加载网页
+##### 一、加载网页
 
 加载网页的方法和`UIWebView`相同, 代码如下:
 
 ```swift
- WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
-[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
-[self.view addSubview:webView];
+let webView = WKWebView(frame: self.view.bounds,configuration: config)
+webView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+view.addSubview(webView)
 ```
 
-### 二、加载状态的回调 `WKNavigationDelegate`
+##### 二、WKWebView的代理方法
+
+*WKNavigationDelegate*
 
 用来追踪加载过程（页面开始加载、加载完成、加载失败）的方法：
 
 ```swift
 // 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation;
+func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
 // 当内容开始返回时调用
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation;
+func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!)
 // 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation;
+func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
 // 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation;
+func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
 ```
+
+用来跳转页面的方法:
+
+```swift
+// 接收到服务器跳转请求之后调用
+func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!)
+// 在收到响应后，决定是否跳转
+func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
+// 在发送请求之前，决定是否跳转
+func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
+```
+
+*WKUIDelegate*
+
+```swift
+// 创建一个新的webView
+func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView?
+// webView中的确认弹窗
+func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void)
+// webView中的输入框
+func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void)
+// webView中的警告弹窗
+func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void)
+//TODO: iOS10中新添加的几个代理方法待补充
+```
+
+*WKScriptMessageHandler*
+
+这个协议包含一个必须实现的方法, 它可以直接将接收到的JS脚本转为Swift或者OC对象.
+
+```swift
+func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage)
+```
+
+##### 三、WKWebView的Cookie
 
