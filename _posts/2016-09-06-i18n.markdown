@@ -142,7 +142,7 @@ extension Bundle{
 用法很简单, App启动的时候初始化
 
 ```swift
-[UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         Languager.standardLanguager.initialize()
 }
@@ -228,3 +228,4 @@ class LanguageSelectViewController: UITableViewController {
 }
 ```
 
+看完了? 是不是很疑惑, 为什么没有image的国际化, 因为我们image不需要国际化 <img class="emoji" title=":blush:" alt=":blush:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f62a.png" height="20" width="20" align="absmiddle">
