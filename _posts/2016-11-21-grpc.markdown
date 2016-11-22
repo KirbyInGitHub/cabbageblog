@@ -26,7 +26,7 @@ grpc使用学习
 
 2、创建一个`.proto`文件
 
-```protoc
+```go
 syntax = "proto3"; //这里使用proto3的语法规则
 
 package helloworld;
