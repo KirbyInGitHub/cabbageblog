@@ -25,13 +25,10 @@ grpc使用进阶
 
 那么在`.proto`语法中:
 
- `请求方法`就对应`service`.
- 
-`请求参数`和`返回结果`就对应`message`.
-
-定义好的`service`经过`grpc`生成以后, 会变为iOS里面的`Protocol`以及遵循这个`Protocol`的`Class`
-
-定义好的`message`经过`grpc`生成以后, 会变为iOS里面的`Class`, 也就是说我们可以直接告别了`JSON`转`Model`, 通过`请求方法`请求回来的已经是我们平常iOS开发中所说的`模型`.
+* `请求方法`就对应`service`.
+* `请求参数`和`返回结果`就对应`message`.
+* 定义好的`service`经过`grpc`生成以后, 会变为iOS里面的`Protocol`以及遵循这个`Protocol`的`Class`
+* 定义好的`message`经过`grpc`生成以后, 会变为iOS里面的`Class`, 也就是说我们可以直接告别了`JSON`转`Model`, 通过`请求方法`请求回来的已经是我们平常iOS开发中所说的`模型`.
 
 ###### 先来看一个`message`:
 
