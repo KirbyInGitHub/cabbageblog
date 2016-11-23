@@ -16,8 +16,7 @@ grpc使用进阶
 
 * `.proto`文件的语法
 * `.proto`定义的基本数据类型/枚举/数组等在iOS-Swift项目中的表现形式
-* 多`service`的联合使用方法
-* 单/多`service`的使用是否需要进行封装/如何封装
+* `service`的使用是否需要进行封装/如何封装
 
 #### `.proto`文件的语法
 
@@ -182,6 +181,6 @@ open class TemplateService : GRPCProtoService, TemplateServiceProtocol {
 
 `int32`这个应该会对我们现有的项目使用造成一定的影响, 但是应该还好. 但是数组都是`NSMutableArray`这就尴尬了, 可以预见到将会充斥着大量的`guard` /`if let` 这样的语法...
 
-#### 多`service`的联合使用方法
+#### `service`的使用是否需要进行封装/如何封装
 
 
