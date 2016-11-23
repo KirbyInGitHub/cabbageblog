@@ -33,7 +33,7 @@ grpc使用进阶
 
 定义好的`message`经过`grpc`生成以后, 会变为iOS里面的`Class`, 也就是说我们可以直接告别了`JSON`转`Model`, 通过`请求方法`请求回来的已经是我们平常iOS开发中所说的`模型`.
 
-#### 先来看一个`message`:
+###### 先来看一个`message`:
 
 ```go
 message BasicDataTypes {
@@ -44,15 +44,11 @@ message BasicDataTypes {
 }
 ```
 
-`BasicDataTypes`表示类名
-
-`{}`里面的表示这个类的属性
-
-`int32/double/bool/string`等表示定义的属性的数据类型
-
-`int32Type`等表示定义的属性名称
-
-`= 1`等表示`message`中每个字段的唯一数字标签, 该标签的作用是在二进制message中唯一标示该字段，一旦定义该字段的值就不能够再更改.
+* `BasicDataTypes`表示类名
+* `{}`里面的表示这个类的属性
+* `int32/double/bool/string`等表示定义的属性的数据类型
+* `int32Type`等表示定义的属性名称
+* `= 1`等表示`message`中每个字段的唯一数字标签, 该标签的作用是在二进制message中唯一标示该字段，一旦定义该字段的值就不能够再更改.
 
 介绍完`message`, 下面看一下生成以后的代码转成Swift的样式
 
@@ -132,7 +128,7 @@ open class OtherType : GPBMessage {
 
 关于`optional`和`required`等标识, 还有`extension`, 等等再补充
 
-#### 再来看一下`service`:
+###### 再来看一下`service`:
 
 ```go
 service TemplateService {
@@ -142,11 +138,9 @@ service TemplateService {
 }
 ```
 
-其中`BasicDataTypesRequest`是方法名
-
-方法名后面`(BasicDataTypes)`是请求的参数 
-
-`returns`后面的`(BasicDataTypes)`是返回的结果
+* `BasicDataTypesRequest`是方法名
+* 方法名后面`(BasicDataTypes)`是请求的参数 
+* `returns`后面的`(BasicDataTypes)`是返回的结果
 
 生成的代码也很简单, 一目了然:
 
