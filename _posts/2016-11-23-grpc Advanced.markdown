@@ -15,11 +15,11 @@ grpc使用进阶
 这一篇文章, 主要重点是集中在以下几个方面.
 
 * `.proto`文件的语法
-* `.proto`定义的基本数据类型/枚举/数组等在iOS项目中的表现形式
+* `.proto`定义的基本数据类型/枚举/数组等在iOS-Swift项目中的表现形式
 * 多`service`的联合使用方法
 * 单/多`service`的使用是否需要进行封装/如何封装
 
-### `.proto`文件的语法
+#### `.proto`文件的语法
 
 从iOS开发的视角来看, 我们的网络请求分为了`请求方法`, `请求参数`, `返回结果` 这三种类型.
 
@@ -52,16 +52,12 @@ message BasicDataTypes {
 ```swift
 open class BasicDataTypes : GPBMessage {
 
-    
     open var int32Type: Int32
 
-    
     open var doubleType: Double
 
-    
     open var boolType: Bool
 
-    
     open var stringType: String!
 }
 ```
@@ -71,17 +67,18 @@ open class BasicDataTypes : GPBMessage {
 同样的, 枚举类型以及数组是这样的:
 
 ```go
-message EnumType {
-    enum Color {
+enum Color {
         white = 0;
         red = 1;
         green = 2;
-    }
+}
+
+message EnumType {
     Color color = 1;
 }
 
 message OtherType {
-    EnumType.Color color = 1;
+    Color color = 1;
     repeated string array = 2;
 }
 ```
@@ -89,7 +86,7 @@ message OtherType {
 生成以后的代码是这样的:
 
 ```swift
-public enum EnumType_Color : Int32 {
+public enum Color : Int32 {
 
     case gpbUnrecognizedEnumeratorValue
 
@@ -102,7 +99,7 @@ public enum EnumType_Color : Int32 {
 
 open class EnumType : GPBMessage {
 
-    open var color: EnumType_Color
+    open var color: Color
 }
 
 open class OtherType : GPBMessage {
@@ -173,5 +170,12 @@ open class TemplateService : GRPCProtoService, TemplateServiceProtocol {
 }
 ```
 
+#### `.proto`定义的基本数据类型/枚举/数组等在iOS-Swift项目中的表现形式
+
+通过上面一小节, 我们不难发现:
+
+* 我们常用的基本数据类型, 类似于`string/bool/double`都是正常的, 但是`int`型在`Swift`代码里面依然被转成`int32`类型, 这个应该会对我们现有的项目使用造成一定的影响
+* 枚举类型和现有的Swift枚举类型基本上保持一致
+* 数组类型就不是Swift的数组类型了, 而是使用的`NSMutableArray`
 
 
