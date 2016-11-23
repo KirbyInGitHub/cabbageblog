@@ -174,8 +174,14 @@ open class TemplateService : GRPCProtoService, TemplateServiceProtocol {
 
 通过上面一小节, 我们不难发现:
 
-* 我们常用的基本数据类型, 类似于`string/bool/double`都是正常的, 但是`int`型在`Swift`代码里面依然被转成`int32`类型, 这个应该会对我们现有的项目使用造成一定的影响
+* 我们常用的基本数据类型, 类似于`string/bool/double`都是正常的, 但是`int`型在`Swift`代码里面依然被转成`int32`类型
 * 枚举类型和现有的Swift枚举类型基本上保持一致
 * 数组类型就不是Swift的数组类型了, 而是使用的`NSMutableArray`
+
+发生上面的主要原因是grpc现在生成的代码只支持`OC`, 因为不是原生`Swift`, 所有很多`Swift`的特性也就没有了.
+
+`int32`这个应该会对我们现有的项目使用造成一定的影响, 但是应该还好. 但是数组都是`NSMutableArray`这就尴尬了, 可以预见到将会充斥着大量的`guard` /`if let` 这样的语法...
+
+#### 多`service`的联合使用方法
 
 
