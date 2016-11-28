@@ -181,6 +181,6 @@ open class TemplateService : GRPCProtoService, TemplateServiceProtocol {
 
 `int32`这个应该会对我们现有的项目使用造成一定的影响, 但是应该还好. 但是数组都是`NSMutableArray`这就尴尬了, 可以预见到将会充斥着大量的`guard` /`if let` 这样的语法...
 
-#### `service`的使用是否需要进行封装/如何封装
+#### `service`的使用是否需要进行封装/如何封装 
 
 
