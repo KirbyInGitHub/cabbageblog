@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Swift使用协议加泛型编程"
+title:  "Swift使用协议加泛型编程(一)"
 date:   2016-12-20 20:52:23 +0800
 description: 
 categories: Home
 ---
 
-Swift使用协议加泛型编程
+Swift使用协议加泛型编程(一)
 
 ---
 
