@@ -154,10 +154,7 @@ extension EZFilter {
         
         DeliveryService.UserGetSubPkgs(filter: filter, success: { (result) in
             
-            let parcels = result.subPkgs?.map({ (package) -> Parcel in
-                
-                return Parcel(package: package)
-            })
+            let parcels = result.subPkgs?.map { Parcel(package: $0) }
             completion(parcels ?? [])
             
         }, failure: failure)
